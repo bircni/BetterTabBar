@@ -13,12 +13,16 @@ public struct BetterTabBar: View {
     var tapFeedback: Bool
     var buttons: [TabButton]
     
-    public struct TabButton {
-        let id: UUID = UUID()
-        var selectedImage: Image
-        var unselectedImage: Image
-        var lightColor: Color
-        var darkColor: Color
+    public init(tabId: Binding<Int>, strokeColor: Color, strokeLineWidth: CGFloat, spacing: CGFloat, maxWidth: CGFloat? = nil, cornerRadius: CGFloat, height: CGFloat, tapFeedback: Bool, buttons: [TabButton]) {
+        self._tabId = tabId
+        self.strokeColor = strokeColor
+        self.strokeLineWidth = strokeLineWidth
+        self.spacing = spacing
+        self.maxWidth = maxWidth
+        self.cornerRadius = cornerRadius
+        self.height = height
+        self.tapFeedback = tapFeedback
+        self.buttons = buttons
     }
     
     public var body: some View{
@@ -47,7 +51,6 @@ public struct BetterTabBar: View {
                                     .opacity(tabId == index ? 1 : 0.5)
                             }
                         }
-                        
                     }
                 )
                 .overlay(
@@ -60,12 +63,17 @@ public struct BetterTabBar: View {
     }
 }
 
-/*
- #Preview {
- BetterTabBar(tabId: .constant(1), strokeColor: .green, strokeLineWidth: 4, spacing: 20, cornerRadius: 30, height: 60, buttons: [
- .init(selectedImage: Image(systemName: "bus"), unselectedImage: Image(systemName: "bus.fill"), lightColor: .green, darkColor: .blue),
- .init(selectedImage: Image(systemName: "car"), unselectedImage: Image(systemName: "car.fill"), lightColor: .green, darkColor: .blue),
- .init(selectedImage: Image(systemName: "tram"), unselectedImage: Image(systemName: "tram.fill"), lightColor: .green, darkColor: .blue)
- ])
- }
- */
+public struct TabButton {
+    public let id: UUID = UUID()
+    public var selectedImage: Image
+    public var unselectedImage: Image
+    public var lightColor: Color
+    public var darkColor: Color
+    
+    public init(selectedImage: Image, unselectedImage: Image, lightColor: Color, darkColor: Color) {
+        self.selectedImage = selectedImage
+        self.unselectedImage = unselectedImage
+        self.lightColor = lightColor
+        self.darkColor = darkColor
+    }
+}
