@@ -1,10 +1,7 @@
-// The Swift Programming Language
-// https://docs.swift.org/swift-book
-
 import Foundation
 import SwiftUI
 
-struct BetterTabBar: View {
+public struct BetterTabBar: View {
     @Environment(\.colorScheme) var colorScheme
     @Binding var tabId: Int
     var strokeColor: Color
@@ -13,9 +10,10 @@ struct BetterTabBar: View {
     var maxWidth: CGFloat?
     var cornerRadius: CGFloat
     var height: CGFloat
+    var tapFeedback: Bool
     var buttons: [TabButton]
     
-    struct TabButton {
+    public struct TabButton {
         let id: UUID = UUID()
         var selectedImage: Image
         var unselectedImage: Image
@@ -23,7 +21,7 @@ struct BetterTabBar: View {
         var darkColor: Color
     }
     
-    var body: some View{
+    public var body: some View{
         VStack (spacing: 15) {
             RoundedRectangle(cornerRadius: cornerRadius)
                 .fill(.regularMaterial)
@@ -33,7 +31,11 @@ struct BetterTabBar: View {
                         ForEach(Array(buttons.enumerated()), id: \.element.id) { index, button in
                             let image = tabId == index ? button.selectedImage : button.unselectedImage
                             Button {
-                                tabBarFeedback()
+                                if tapFeedback {
+#if os(iOS)
+                                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+#endif
+                                }
                                 withAnimation {
                                     tabId = index
                                 }
@@ -56,20 +58,14 @@ struct BetterTabBar: View {
                 .animation(.spring())
         }
     }
-    
-    private func tabBarFeedback() {
-#if os(iOS)
-        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-#endif
-    }
 }
 
 /*
-#Preview {
-    BetterTabBar(tabId: .constant(1), strokeColor: .green, strokeLineWidth: 4, spacing: 20, cornerRadius: 30, height: 60, buttons: [
-        .init(selectedImage: Image(systemName: "bus"), unselectedImage: Image(systemName: "bus.fill"), lightColor: .green, darkColor: .blue),
-        .init(selectedImage: Image(systemName: "car"), unselectedImage: Image(systemName: "car.fill"), lightColor: .green, darkColor: .blue),
-        .init(selectedImage: Image(systemName: "tram"), unselectedImage: Image(systemName: "tram.fill"), lightColor: .green, darkColor: .blue)
-    ])
-}
-*/
+ #Preview {
+ BetterTabBar(tabId: .constant(1), strokeColor: .green, strokeLineWidth: 4, spacing: 20, cornerRadius: 30, height: 60, buttons: [
+ .init(selectedImage: Image(systemName: "bus"), unselectedImage: Image(systemName: "bus.fill"), lightColor: .green, darkColor: .blue),
+ .init(selectedImage: Image(systemName: "car"), unselectedImage: Image(systemName: "car.fill"), lightColor: .green, darkColor: .blue),
+ .init(selectedImage: Image(systemName: "tram"), unselectedImage: Image(systemName: "tram.fill"), lightColor: .green, darkColor: .blue)
+ ])
+ }
+ */
