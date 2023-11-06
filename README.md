@@ -1,5 +1,6 @@
 [![Platforms](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbircni%2FBetterTabBar%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/bircni/BetterTabBar)
 [![Swift Versions](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fbircni%2FBetterTabBar%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/bircni/BetterTabBar)
+[![Build](https://github.com/bircni/BetterTabBar/actions/workflows/swift.yml/badge.svg?branch=main)](https://github.com/bircni/BetterTabBar/actions/workflows/swift.yml)
 
 # BetterTabBar
 
