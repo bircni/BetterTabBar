@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "bettertabbar",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bircni/BetterTabBar",
+      "state" : {
+        "revision" : "041aefc6253ce1c7b50b7bb2a34c3195b1849389",
+        "version" : "0.1.0"
+      }
+    }
+  ],
+  "version" : 2
+}
